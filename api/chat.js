@@ -145,10 +145,16 @@ module.exports = async function handler(req, res) {
   const clauseData = loadClauses();
   const systemPrompt = SYSTEM_PROMPT.replace("{{CLAUSES}}", clauseData);
 
-  // Keep default replies genuinely short by capping tokens, not just by
-  // instructing the model — instructions alone aren't reliable enough.
-  // Only relax the cap when the latest message signals the staff member
-  // actually wants a deeper explanation.
+  // gpt-oss-120b is a reasoning model: it spends tokens on internal
+  // chain-of-thought BEFORE writing the visible reply. If max_tokens is
+  // too low, the reasoning phase alone can exhaust the budget and the
+  // API returns HTTP 200 with an empty/missing message.content (this is
+  // a known issue with this model family, not specific to our setup).
+  // Fix: keep max_tokens generous regardless of brevity mode (brevity is
+  // enforced via the system prompt, not by starving the token budget),
+  // and explicitly request low/minimal reasoning effort so fewer tokens
+  // get burned on chain-of-thought in the first place — which also
+  // makes replies faster and cheaper.
   const lastUserMsg = [...trimmedMessages].reverse().find((m) => m.role === "user");
   const depthSignal = /\b(explain|walk me through|full breakdown|why|in detail|detailed|step.?by.?step|full process|elaborate)\b/i;
   const wantsDepth = lastUserMsg && typeof lastUserMsg.content === "string" && depthSignal.test(lastUserMsg.content);
@@ -157,7 +163,8 @@ module.exports = async function handler(req, res) {
     model: "openai/gpt-oss-120b",
     messages: [{ role: "system", content: systemPrompt }, ...trimmedMessages],
     temperature: 0.2,
-    max_tokens: wantsDepth ? 500 : 140,
+    max_tokens: wantsDepth ? 900 : 500,
+    reasoning: { effort: wantsDepth ? "medium" : "low" },
   };
 
   try {
@@ -183,9 +190,45 @@ module.exports = async function handler(req, res) {
       return;
     }
 
-    const reply = data?.choices?.[0]?.message?.content;
+    let reply = data?.choices?.[0]?.message?.content;
+
+    // Known gpt-oss-120b behavior: if the reasoning phase consumes the
+    // whole token budget, content comes back empty with finish_reason
+    // "length" even on a 200 OK. One automatic retry with a larger
+    // budget and minimal reasoning effort resolves this in practice.
     if (!reply) {
-      res.status(502).json({ error: "No response content returned from model.", details: data });
+      const finishReason = data?.choices?.[0]?.finish_reason;
+      const retryPayload = {
+        ...payload,
+        max_tokens: Math.max(payload.max_tokens * 2, 900),
+        reasoning: { effort: "low" },
+      };
+
+      const retryUpstream = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${apiKey}`,
+          "HTTP-Referer": process.env.PUBLIC_APP_URL || "https://simba-clause-finder.vercel.app",
+          "X-Title": "Simba Car Hire - Staff Clause Assistant",
+        },
+        body: JSON.stringify(retryPayload),
+      });
+      const retryData = await retryUpstream.json();
+      reply = retryData?.choices?.[0]?.message?.content;
+
+      if (!reply) {
+        res.status(502).json({
+          error:
+            "The model returned an empty response (finish_reason: " +
+            (finishReason || "unknown") +
+            "). This usually means the token budget was exhausted by internal reasoning. A retry with a larger budget also failed — try again, or check OpenRouter account credit.",
+          details: { firstAttempt: data, retryAttempt: retryData },
+        });
+        return;
+      }
+
+      res.status(200).json({ reply, usage: retryData.usage || null, retried: true });
       return;
     }
 
