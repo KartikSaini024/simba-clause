@@ -681,7 +681,19 @@ const chatSend = document.getElementById('chatSend');
 const chatStatus = document.getElementById('chatStatus');
 const chatClear = document.getElementById('chatClear');
 
-let chatHistory = []; // [{role:'user'|'assistant', content:'...'}]
+// chatHistory drives both the UI render AND what gets sent back to the
+// API as conversation context. Error messages (role: 'error') are a
+// UI-only concept — NVIDIA's API only accepts 'system' | 'user' |
+// 'assistant' | 'tool' roles, so any 'error' entry sent back as context
+// gets hard-rejected by the API on the next turn. buildApiMessages()
+// strips them out before every request; render() still shows them.
+let chatHistory = []; // [{role:'user'|'assistant'|'error', content:'...'}]
+
+function buildApiMessages() {
+  return chatHistory
+    .filter(m => m.role === 'user' || m.role === 'assistant')
+    .map(m => ({ role: m.role, content: m.content }));
+}
 
 /**
  * Minimal, dependency-free markdown renderer for assistant replies.
@@ -808,7 +820,7 @@ async function sendChat(text) {
     const res = await fetch('/api/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ messages: chatHistory })
+      body: JSON.stringify({ messages: buildApiMessages() })
     });
     const data = await res.json();
     hideTyping();
