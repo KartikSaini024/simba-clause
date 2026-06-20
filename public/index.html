@@ -275,12 +275,12 @@
     font-size: 14.5px;
     line-height: 1.55;
     border: 1px solid var(--rule);
-    white-space: pre-wrap;
   }
   .chat-msg.user .chat-bubble {
     background: var(--ink);
     color: var(--paper);
     border-color: var(--ink);
+    white-space: pre-wrap;
   }
   .chat-msg.assistant .chat-bubble {
     background: var(--paper);
@@ -290,6 +290,32 @@
     background: #f7e6e2;
     border-left: 3px solid var(--accent);
     color: var(--accent);
+    white-space: pre-wrap;
+  }
+
+  /* Rendered markdown inside assistant bubbles */
+  .chat-bubble p { margin: 0 0 10px; }
+  .chat-bubble p:last-child { margin-bottom: 0; }
+  .chat-bubble ul, .chat-bubble ol {
+    margin: 0 0 10px;
+    padding-left: 20px;
+  }
+  .chat-bubble ul:last-child, .chat-bubble ol:last-child { margin-bottom: 0; }
+  .chat-bubble li { margin-bottom: 5px; }
+  .chat-bubble li:last-child { margin-bottom: 0; }
+  .chat-bubble strong { color: var(--accent); font-weight: 700; }
+  .chat-bubble em { font-style: italic; }
+  .chat-bubble code {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 13px;
+    background: var(--tag-bg);
+    padding: 1px 5px;
+    border-radius: 2px;
+  }
+  .chat-bubble h3, .chat-bubble h4, .chat-bubble h5, .chat-bubble h6 {
+    margin: 0 0 8px;
+    font-size: 15px;
+    font-weight: 700;
   }
 
   .chat-empty {
@@ -657,6 +683,54 @@ const chatClear = document.getElementById('chatClear');
 
 let chatHistory = []; // [{role:'user'|'assistant', content:'...'}]
 
+/**
+ * Minimal, dependency-free markdown renderer for assistant replies.
+ * Escapes HTML FIRST, then applies markdown transforms on the escaped
+ * text — so any HTML/script-like content the model outputs is inert,
+ * and only our own generated tags end up in the DOM. Covers the subset
+ * the assistant realistically produces: **bold**, *italic*, `code`,
+ * bullet lists (-, *), numbered lists, ## headers, and paragraphs.
+ */
+function renderMarkdown(raw) {
+  let text = escapeHtml(raw);
+
+  // Inline: bold, italic, inline code (order matters — bold before italic)
+  text = text.replace(/\\*\\*(.+?)\\*\\*/g, '<strong>$1</strong>');
+  text = text.replace(/(^|[^*])\\*([^*\\n]+)\\*(?!\\*)/g, '$1<em>$2</em>');
+  text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
+
+  // Split into blocks on blank lines, then handle each block
+  const blocks = text.split(/\\n{2,}/);
+  const htmlBlocks = blocks.map(block => {
+    const lines = block.split('\\n').filter(l => l.trim().length > 0);
+    if (!lines.length) return '';
+
+    // Heading
+    if (/^#{1,4}\\s+/.test(lines[0]) && lines.length === 1) {
+      const level = lines[0].match(/^(#{1,4})/)[1].length;
+      const content = lines[0].replace(/^#{1,4}\\s+/, '');
+      return '<h' + (level + 2) + '>' + content + '</h' + (level + 2) + '>';
+    }
+
+    // Bullet list
+    if (lines.every(l => /^[-*]\\s+/.test(l.trim()))) {
+      const items = lines.map(l => '<li>' + l.trim().replace(/^[-*]\\s+/, '') + '</li>').join('');
+      return '<ul>' + items + '</ul>';
+    }
+
+    // Numbered list
+    if (lines.every(l => /^\\d+[.)]\\s+/.test(l.trim()))) {
+      const items = lines.map(l => '<li>' + l.trim().replace(/^\\d+[.)]\\s+/, '') + '</li>').join('');
+      return '<ol>' + items + '</ol>';
+    }
+
+    // Plain paragraph — keep single line breaks within it
+    return '<p>' + lines.join('<br>') + '</p>';
+  });
+
+  return htmlBlocks.join('');
+}
+
 function renderChat() {
   if (chatHistory.length === 0) {
     chatWindow.innerHTML = '';
@@ -666,10 +740,11 @@ function renderChat() {
   chatWindow.innerHTML = chatHistory.map(m => {
     const roleLabel = m.role === 'user' ? 'You' : (m.role === 'error' ? 'Error' : 'Assistant');
     const cls = m.role === 'user' ? 'user' : (m.role === 'error' ? 'error' : 'assistant');
+    const bodyHtml = (m.role === 'assistant') ? renderMarkdown(m.content) : escapeHtml(m.content);
     return `
       <div class="chat-msg ${cls}">
         <span class="chat-role">${roleLabel}</span>
-        <div class="chat-bubble">${escapeHtml(m.content)}</div>
+        <div class="chat-bubble">${bodyHtml}</div>
       </div>
     `;
   }).join('');
