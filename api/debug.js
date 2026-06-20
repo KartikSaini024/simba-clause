@@ -14,8 +14,7 @@ const fs = require("fs");
 const path = require("path");
 
 module.exports = function handler(req, res) {
-  const key = process.env.OPENROUTER_API_KEY;
-  const referer = process.env.PUBLIC_APP_URL;
+  const key = process.env.NVIDIA_API_KEY;
 
   const candidatePaths = [
     path.join(__dirname, "..", "public", "clauses.json"),
@@ -34,10 +33,9 @@ module.exports = function handler(req, res) {
   });
 
   res.status(200).json({
-    openrouter_key_present: Boolean(key),
-    openrouter_key_prefix: key ? key.slice(0, 10) + "…" : null,
-    openrouter_key_length: key ? key.length : 0,
-    public_app_url_set: Boolean(referer),
+    nvidia_key_present: Boolean(key),
+    nvidia_key_prefix: key ? key.slice(0, 10) + "…" : null,
+    nvidia_key_length: key ? key.length : 0,
     node_version: process.version,
     runtime_region: process.env.VERCEL_REGION || "unknown",
     cwd: process.cwd(),
