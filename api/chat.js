@@ -157,27 +157,30 @@ module.exports = async function handler(req, res) {
   const clauseData = loadClauses();
   const systemPrompt = SYSTEM_PROMPT.replace("{{CLAUSES}}", clauseData);
 
-  // NVIDIA's hosted DiffusionGemma endpoint. Unlike the previous
-  // gpt-oss-120b setup, this model is NOT a token-by-token autoregressive
-  // reasoning model — it's a text-diffusion model that denoises a block
-  // of tokens at once. It does not consume the max_tokens budget on
-  // hidden chain-of-thought the way gpt-oss did, so the empty-response
-  // bug we hit before should not apply here. We still keep stream:false
-  // (rather than true) because DiffusionGemma's streaming emits whole
-  // 256-token blocks at a time rather than incremental tokens, which
-  // doesn't suit a simple request/response serverless function — a
-  // plain JSON response is simpler and more reliable here.
+  // NVIDIA's hosted DiffusionGemma endpoint. This model DOES have an
+  // internal "thinking" phase when enabled (wrapped in <|channel>thought
+  // ... <channel|> before the final answer per Google's model card), and
+  // there's a documented issue with this model family where, if thinking
+  // is active, generation can consume the entire max_tokens budget on
+  // internal/filler tokens with finish_reason "length" and an empty
+  // visible reply — the same failure mode we hit with gpt-oss-120b
+  // before switching providers. Disabling thinking via
+  // chat_template_kwargs is also reported as unreliable on some serving
+  // stacks for this model family, so as a defense in depth we: (1) keep
+  // enable_thinking false to minimize the chance of it triggering at
+  // all, (2) keep max_tokens generous as a backstop, and (3) auto-retry
+  // once with an even larger budget if we still get an empty reply.
   const payload = {
     model: "google/diffusiongemma-26b-a4b-it",
     messages: [{ role: "system", content: systemPrompt }, ...trimmedMessages],
-    max_tokens: 700,
+    max_tokens: 900,
     temperature: 0.4,
     top_p: 0.95,
     stream: false,
-    chat_template_kwargs: { enable_thinking: true },
+    chat_template_kwargs: { enable_thinking: false },
   };
 
-  try {
+  async function callNvidia(p) {
     const upstream = await fetch("https://integrate.api.nvidia.com/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -185,34 +188,49 @@ module.exports = async function handler(req, res) {
         Authorization: `Bearer ${apiKey}`,
         Accept: "application/json",
       },
-      body: JSON.stringify(payload),
+      body: JSON.stringify(p),
     });
-
     const data = await upstream.json();
+    return { ok: upstream.ok, status: upstream.status, data };
+  }
 
-    if (!upstream.ok) {
-      res.status(upstream.status).json({
-        error: data?.error?.message || data?.error || "NVIDIA API request failed.",
-        details: data,
+  try {
+    const first = await callNvidia(payload);
+
+    if (!first.ok) {
+      res.status(first.status).json({
+        error: first.data?.error?.message || first.data?.error || "NVIDIA API request failed.",
+        details: first.data,
       });
       return;
     }
 
-    const reply = data?.choices?.[0]?.message?.content;
+    let reply = first.data?.choices?.[0]?.message?.content;
 
     if (!reply) {
-      const finishReason = data?.choices?.[0]?.finish_reason;
-      res.status(502).json({
-        error:
-          "The model returned an empty response (finish_reason: " +
-          (finishReason || "unknown") +
-          "). Try again, or check NVIDIA account credit/quota.",
-        details: data,
-      });
+      // Empty content despite HTTP 200 — retry once with a larger
+      // budget. See comment above the payload definition.
+      const finishReason = first.data?.choices?.[0]?.finish_reason;
+      const retryPayload = { ...payload, max_tokens: 1600 };
+      const retry = await callNvidia(retryPayload);
+      reply = retry.data?.choices?.[0]?.message?.content;
+
+      if (!reply) {
+        res.status(502).json({
+          error:
+            "The model returned an empty response (finish_reason: " +
+            (finishReason || "unknown") +
+            "). A retry with a larger budget also failed — try again, or check NVIDIA account credit/quota.",
+          details: { firstAttempt: first.data, retryAttempt: retry.data },
+        });
+        return;
+      }
+
+      res.status(200).json({ reply, usage: retry.data.usage || null, retried: true });
       return;
     }
 
-    res.status(200).json({ reply, usage: data.usage || null });
+    res.status(200).json({ reply, usage: first.data.usage || null });
   } catch (err) {
     console.error("chat.js unexpected error:", err);
     res.status(500).json({
