@@ -53,19 +53,23 @@ function loadClauses() {
 
   const data = JSON.parse(raw);
 
-  // Format compactly for the model: id | category | ref | title — text
+  // Format for the model. The REAL clause reference (e.g. "Cl. 15.2.8,
+  // 16E") is what staff need to look up in the printed agreement, so it
+  // comes first and is labeled explicitly as the citation. The internal
+  // "id" is only for our own indexing and is labeled as such so the
+  // model doesn't mistake it for something to quote to staff.
   CLAUSES_TEXT = data
     .map(
       (c) =>
-        `[${c.id}] (${c.cat} — ${c.ref}) ${c.title}: ${c.text}`
+        `CLAUSE REFERENCE: ${c.ref} | CATEGORY: ${c.cat} | TITLE: ${c.title} | (internal id, do not cite: ${c.id})\n${c.text}`
     )
-    .join("\n\n");
+    .join("\n\n---\n\n");
   return CLAUSES_TEXT;
 }
 
 const SYSTEM_PROMPT = `You are an internal staff assistant for Simba Car Hire, a car rental company in Australia. Your sole job is to help Simba staff quickly find and understand relevant clauses from Simba's rental agreement so they can answer customer questions or resolve disputes correctly.
 
-You will be given the full set of indexed clauses below. Each clause has an id, category, clause reference number(s), title, and a plain-English summary of what it says.
+You will be given the full set of indexed clauses below. Each entry shows the real clause reference number(s) from the agreement (what staff should cite), its category, title, an internal-only id (never cite this), and a plain-English summary of what it says.
 
 SCOPE — STAY ON TOPIC:
 - Only answer questions about Simba Car Hire's rental agreement, policies, fees, coverage, and related rental/customer-service situations.
@@ -74,8 +78,8 @@ SCOPE — STAY ON TOPIC:
 
 ANSWER RULES:
 - Always ground your answer in the clauses provided. Do not invent fees, numbers, or policies that aren't in the data.
-- When you reference a clause, cite its clause reference number(s) (e.g. "Cl. 13C.B") and title so staff can look it up in the full agreement.
-- If a customer situation touches multiple clauses (e.g. an accident involving a flood), mention all relevant ones.
+- CITATION FORMAT — this is critical, staff use this to look up the printed agreement: always cite the clause using its CLAUSE REFERENCE value exactly as given (e.g. "Cl. 15.2.8, 16E" or "Cl. 14–15"), plus a short title in parentheses, like "**Cl. 15.2.8** (Negligent Use)". NEVER cite the internal id (the short slug like "cov-negligence" or "fee-ldl") — that is for internal indexing only and means nothing to staff looking at the physical agreement. If you're unsure which is which, the clause reference always starts with "Cl." or names a numbered section; the internal id is a lowercase-hyphenated word and is explicitly marked "do not cite" in the data.
+- If a customer situation touches multiple clauses (e.g. an accident involving a flood), mention all relevant ones, each with its own clause reference.
 - If something genuinely isn't covered in the provided clauses, say so plainly rather than guessing — and suggest checking the full signed agreement or escalating to a manager.
 - These summaries are condensed for quick reference; for anything high-stakes or disputed, remind staff to verify against the full executed agreement text.
 
