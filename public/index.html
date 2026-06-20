@@ -690,42 +690,71 @@ let chatHistory = []; // [{role:'user'|'assistant', content:'...'}]
  * and only our own generated tags end up in the DOM. Covers the subset
  * the assistant realistically produces: **bold**, *italic*, `code`,
  * bullet lists (-, *), numbered lists, ## headers, and paragraphs.
+ *
+ * Models occasionally emit bullet markers inline within a sentence with
+ * no real newline before them (e.g. "Key clauses - **Cl. X** - applies
+ * here - **Cl. Y** - also applies"), despite formatting instructions.
+ * normalizeInlineBullets() inserts a real newline before any " - "
+ * that's followed by what looks like the start of a new item (a bold
+ * marker or a capital letter), while leaving normal hyphens alone
+ * (ranges like "21-24", compound words like "Loss-or-Damage" have no
+ * surrounding spaces and are untouched).
  */
+function normalizeInlineBullets(text) {
+  return text.replace(/([^\n])\s-\s(?=\*\*|[A-Z])/g, '$1\n- ');
+}
+
 function renderMarkdown(raw) {
   let text = escapeHtml(raw);
+  text = normalizeInlineBullets(text);
 
   // Inline: bold, italic, inline code (order matters — bold before italic)
-  text = text.replace(/\\*\\*(.+?)\\*\\*/g, '<strong>$1</strong>');
-  text = text.replace(/(^|[^*])\\*([^*\\n]+)\\*(?!\\*)/g, '$1<em>$2</em>');
+  text = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  text = text.replace(/(^|[^*])\*([^*\n]+)\*(?!\*)/g, '$1<em>$2</em>');
   text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
 
   // Split into blocks on blank lines, then handle each block
-  const blocks = text.split(/\\n{2,}/);
+  const blocks = text.split(/\n{2,}/);
   const htmlBlocks = blocks.map(block => {
-    const lines = block.split('\\n').filter(l => l.trim().length > 0);
-    if (!lines.length) return '';
+    const rawLines = block.split('\n').filter(l => l.trim().length > 0);
+    if (!rawLines.length) return '';
 
     // Heading
-    if (/^#{1,4}\\s+/.test(lines[0]) && lines.length === 1) {
-      const level = lines[0].match(/^(#{1,4})/)[1].length;
-      const content = lines[0].replace(/^#{1,4}\\s+/, '');
+    if (/^#{1,4}\s+/.test(rawLines[0]) && rawLines.length === 1) {
+      const level = rawLines[0].match(/^(#{1,4})/)[1].length;
+      const content = rawLines[0].replace(/^#{1,4}\s+/, '');
       return '<h' + (level + 2) + '>' + content + '</h' + (level + 2) + '>';
     }
 
-    // Bullet list
-    if (lines.every(l => /^[-*]\\s+/.test(l.trim()))) {
-      const items = lines.map(l => '<li>' + l.trim().replace(/^[-*]\\s+/, '') + '</li>').join('');
-      return '<ul>' + items + '</ul>';
+    const isBulletLine = (l) => /^[-*]\s+/.test(l.trim());
+    const isNumberedLine = (l) => /^\d+[.)]\s+/.test(l.trim());
+
+    // Mixed block: a lead sentence followed by a run of bullet lines
+    // (very common — "Short answer: ...\n- Cl. X - ...\n- Cl. Y - ...").
+    // Split it into a paragraph for the lead, then a real <ul> for the
+    // bullets, rather than requiring the whole block to be 100% bullets.
+    const firstBulletIdx = rawLines.findIndex(isBulletLine);
+    const bulletCount = rawLines.filter(isBulletLine).length;
+
+    if (firstBulletIdx !== -1 && bulletCount >= 2) {
+      const leadLines = rawLines.slice(0, firstBulletIdx);
+      const bulletLines = rawLines.slice(firstBulletIdx).filter(isBulletLine);
+      const leadHtml = leadLines.length ? '<p>' + leadLines.join('<br>') + '</p>' : '';
+      const listHtml =
+        '<ul>' +
+        bulletLines.map(l => '<li>' + l.trim().replace(/^[-*]\s+/, '') + '</li>').join('') +
+        '</ul>';
+      return leadHtml + listHtml;
     }
 
-    // Numbered list
-    if (lines.every(l => /^\\d+[.)]\\s+/.test(l.trim()))) {
-      const items = lines.map(l => '<li>' + l.trim().replace(/^\\d+[.)]\\s+/, '') + '</li>').join('');
+    // Numbered list (whole block)
+    if (rawLines.every(isNumberedLine)) {
+      const items = rawLines.map(l => '<li>' + l.trim().replace(/^\d+[.)]\s+/, '') + '</li>').join('');
       return '<ol>' + items + '</ol>';
     }
 
     // Plain paragraph — keep single line breaks within it
-    return '<p>' + lines.join('<br>') + '</p>';
+    return '<p>' + rawLines.join('<br>') + '</p>';
   });
 
   return htmlBlocks.join('');
