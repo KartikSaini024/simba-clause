@@ -1,0 +1,12 @@
+{
+  "name": "simba-clause-finder",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Internal staff tool for searching the Simba Car Hire rental agreement, with an AI chat assistant backed by OpenRouter.",
+  "scripts": {
+    "dev": "vercel dev"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

@@ -1,1 +1,6 @@
-# simba-clause
+node_modules/
+.vercel/
+.env
+.env.local
+.DS_Store
+*.log
