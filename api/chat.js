@@ -14,11 +14,43 @@ const fs = require("fs");
 const path = require("path");
 
 // Load clause data once per cold start (it's small, ~30KB).
+//
+// IMPORTANT: process.cwd() is not reliable inside Vercel serverless
+// functions — it does not always resolve to the repo root the way it
+// does in local dev. We resolve relative to this file's own location
+// instead (__dirname), and try a couple of likely paths so this works
+// both locally (`vercel dev`) and in the deployed Lambda bundle.
 let CLAUSES_TEXT = null;
 function loadClauses() {
   if (CLAUSES_TEXT) return CLAUSES_TEXT;
-  const filePath = path.join(process.cwd(), "public", "clauses.json");
-  const raw = fs.readFileSync(filePath, "utf8");
+
+  const candidatePaths = [
+    path.join(__dirname, "..", "public", "clauses.json"), // api/ -> ../public
+    path.join(process.cwd(), "public", "clauses.json"),   // local dev fallback
+    path.join(__dirname, "clauses.json"),                  // bundled alongside function
+    path.join("/var/task", "public", "clauses.json"),       // Vercel Lambda bundle root (includeFiles)
+  ];
+
+  let raw = null;
+  let lastErr = null;
+  for (const p of candidatePaths) {
+    try {
+      raw = fs.readFileSync(p, "utf8");
+      break;
+    } catch (err) {
+      lastErr = err;
+    }
+  }
+
+  if (raw === null) {
+    throw new Error(
+      "Could not locate clauses.json. Tried: " +
+        candidatePaths.join(", ") +
+        ". Last error: " +
+        (lastErr ? lastErr.message : "unknown")
+    );
+  }
+
   const data = JSON.parse(raw);
 
   // Format compactly for the model: id | category | ref | title — text
@@ -137,6 +169,9 @@ module.exports = async function handler(req, res) {
 
     res.status(200).json({ reply, usage: data.usage || null });
   } catch (err) {
-    res.status(500).json({ error: "Unexpected server error.", message: String(err) });
+    console.error("chat.js unexpected error:", err);
+    res.status(500).json({
+      error: "Unexpected server error: " + (err && err.message ? err.message : String(err)),
+    });
   }
 };
