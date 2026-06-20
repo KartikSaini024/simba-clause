@@ -79,11 +79,15 @@ ANSWER RULES:
 - If something genuinely isn't covered in the provided clauses, say so plainly rather than guessing — and suggest checking the full signed agreement or escalating to a manager.
 - These summaries are condensed for quick reference; for anything high-stakes or disputed, remind staff to verify against the full executed agreement text.
 
-FORMATTING — staff read this in a narrow chat panel on a phone or counter screen, often mid-call:
-- Lead with a short, direct answer in plain sentences (1-3 sentences) before anything else.
-- Use markdown for structure: **bold** for key terms or amounts, bullet lists for multiple clauses or steps.
-- Avoid large markdown tables — they don't render well in a narrow chat width. If you have 2+ supporting clauses, use a short bullet list instead, e.g. "- **Cl. 15.2.8** (Negligent Use) — pole strikes are excluded from all cover."
-- Keep the whole answer tight: a quick-reference lookup, not an essay. Prefer brevity over completeness when both compete.
+FORMATTING & LENGTH — staff read this in a narrow chat panel on a phone or counter screen, often mid-call. Default mode is QUICK LOOKUP, not a report:
+- Default answer shape: one short sentence with the direct answer, then at most 3 bullet points, each ONE line, in the form "- **Cl. X** — what it means". Nothing else, unless the user clearly asks for more detail (phrases like "explain", "walk me through", "full breakdown", "why").
+- Hard cap for the default case: 50 words total, including the lead sentence and all bullets combined. Count as you write. If you're about to exceed it, cut bullets or shorten the lead sentence — never exceed the cap by adding a "what staff should do" section, a numbered procedure, or extra context.
+- Never include sections like "Practical steps for staff", "What to do next", or any multi-step procedure unless the user explicitly asks how to handle or process the situation, not just what applies to it.
+- CRITICAL FORMATTING RULE: each bullet point MUST be on its own separate line, with a real newline character before and after it — never write bullets as a run of " - text - text - text" inside one continuous sentence or paragraph. If you cannot put each bullet on its own line, do not use bullets at all — write one plain sentence instead.
+- Always put a real newline between the lead sentence and the bullet list, and a real newline between each individual bullet line. Treat every "- " as the start of a brand new line.
+- Use markdown for structure: **bold** for clause numbers and key amounts/terms only — don't bold whole sentences.
+- Never use markdown tables.
+- Only expand into a longer, multi-section answer (more bullets, a numbered procedure, more context) when the user's message signals they want depth — e.g. "explain in detail", "what's the full process", "walk me through this". Otherwise assume they want the fast answer so they can keep talking to the customer.
 
 CLAUSE DATA:
 ${"{{CLAUSES}}"}`;
@@ -141,11 +145,19 @@ module.exports = async function handler(req, res) {
   const clauseData = loadClauses();
   const systemPrompt = SYSTEM_PROMPT.replace("{{CLAUSES}}", clauseData);
 
+  // Keep default replies genuinely short by capping tokens, not just by
+  // instructing the model — instructions alone aren't reliable enough.
+  // Only relax the cap when the latest message signals the staff member
+  // actually wants a deeper explanation.
+  const lastUserMsg = [...trimmedMessages].reverse().find((m) => m.role === "user");
+  const depthSignal = /\b(explain|walk me through|full breakdown|why|in detail|detailed|step.?by.?step|full process|elaborate)\b/i;
+  const wantsDepth = lastUserMsg && typeof lastUserMsg.content === "string" && depthSignal.test(lastUserMsg.content);
+
   const payload = {
     model: "openai/gpt-oss-120b",
     messages: [{ role: "system", content: systemPrompt }, ...trimmedMessages],
     temperature: 0.2,
-    max_tokens: 800,
+    max_tokens: wantsDepth ? 500 : 140,
   };
 
   try {
