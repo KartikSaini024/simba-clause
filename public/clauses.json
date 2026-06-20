@@ -1,0 +1,474 @@
+[
+  {
+    "id": "fee-bond",
+    "cat": "Fees & Charges",
+    "title": "Security Bond",
+    "ref": "Front page / 13.3\u201313.4",
+    "tags": "deposit bond hold",
+    "text": "Security Bond of AUD $500\u2013$2000 deducted from your card, refunded after rental inspection approval. Charged automatically if booking reaches 28+ days. First-time local hirers must pay a $1000 bond (8.10). Bond can be withheld until all payments, damage, cleaning and other charges are settled (13.4)."
+  },
+  {
+    "id": "fee-ldl",
+    "cat": "Fees & Charges",
+    "title": "Loss or Damage Liability (LDL / excess)",
+    "ref": "Front page / Cl. 14\u201315",
+    "tags": "excess insurance damage liability LDR coverage",
+    "text": "LDL of $5,480\u2013$6,480 applies for drivers 25\u201385 (varies by vehicle class). For drivers 21\u201324, LDL is $6,380\u2013$9,818. Any Loss or Damage Liability Reduction (LDR) you buy only covers the FIRST incident in the hire period \u2014 a second incident is charged at full LDL again (15.3)."
+  },
+  {
+    "id": "fee-claims-mgmt",
+    "cat": "Fees & Charges",
+    "title": "Claims Management Fee",
+    "ref": "Cl. 13E",
+    "tags": "admin claim processing",
+    "text": "$50\u2013$495 per incident, charged regardless of whether a third party was at fault, whether a third party can be identified, or whether you hold LDR coverage. Covers Simba's internal claim handling/admin costs."
+  },
+  {
+    "id": "fee-immobilisation",
+    "cat": "Fees & Charges",
+    "title": "Daily Immobilisation Fee",
+    "ref": "Cl. 13C.A\u201313C.B",
+    "tags": "downtime loss of use repair days off road",
+    "text": "Charged per calendar day (or part day) the vehicle is unavailable for hire due to an incident \u2014 covers Simba's lost rental income while it's being assessed or repaired. Rate is whichever is higher: market rate or your daily rental rate. See full detail entry below."
+  },
+  {
+    "id": "fee-other",
+    "cat": "Fees & Charges",
+    "title": "Other Listed Fees & Charges",
+    "ref": "Front page schedule",
+    "tags": "smoking cleaning late return key refuel toll admin",
+    "text": "Smoking fee $395 \u00b7 Cleaning fee $50\u2013$295 \u00b7 Late return $99 or daily market rate \u00b7 Replacement key $950\u2013$2,000 \u00b7 Refuelling $75 service fee + cost of fuel \u00b7 Non-mechanical call out $295 \u00b7 Admin cost $110/hr \u00b7 Carpets/GPS/accessories $100\u2013$499 \u00b7 Lost toll tag $250\u2013$450 \u00b7 Admin fee up to $110 per item (postage/infringement/toll) \u00b7 Tolls = admin fee + toll amount \u00b7 Fine nomination fee $110 per fine (12.1) \u00b7 Early pickup fee $50 if collected >1hr early without approval (8.14) \u00b7 Commercial misuse fee $500 (8.24.1) \u00b7 Fuel tampering fee $199 (13A.6) \u00b7 Decontamination/smoking-odour fee min $450 (16G.5) \u00b7 Tampering with GPS/telematics fee $495 (16A.6) \u00b7 Safety system tampering fee $495 (16A.7) \u00b7 Administrative Investigation Fee $250 for false mechanical fault claims (12.10F)."
+  },
+  {
+    "id": "fee-immob-detail",
+    "cat": "Fees & Charges",
+    "title": "Daily Immobilisation Fee \u2014 detail",
+    "ref": "Cl. 13C.A, 13C.B",
+    "tags": "downtime loss of use repair days off road total loss",
+    "text": "Charged for each calendar day (or part day) the vehicle is off-fleet for assessment/parts/repair after an incident. Equals the market rate or daily rental rate, whichever is higher. Owner does NOT need to prove an actual lost booking \u2014 only that earning capacity was impaired. Applies even where repairs are delayed by insurers, parts, or queues, and even if the vehicle is written off (up to 30 days' immobilisation fee in a total-loss scenario per 14B.5)."
+  },
+  {
+    "id": "cov-flood",
+    "cat": "Coverage Exclusions",
+    "title": "Flood / Water Damage \u2014 Always Excluded",
+    "ref": "Flood clause / 15.2.2 / 15.2.7 / 17A",
+    "tags": "flood water submersion creek river storm surge insurance void",
+    "text": "Any water ingress, submersion, or flood-related damage (floodwaters, storm surge, flash flooding, driving through water-affected roads, creeks, rivers) is excluded from ALL coverage and LDR products, regardless of which protection plan you bought. You are fully liable for repair, recovery, towing, cleaning, engine/electrical/interior damage, and loss of vehicle use. Applies even if you weren't aware of flooding at the time."
+  },
+  {
+    "id": "cov-weather",
+    "cat": "Coverage Exclusions",
+    "title": "Natural/Weather Event Damage \u2014 Excluded",
+    "ref": "Coverage & Payment clause / 17A",
+    "tags": "hail storm fire lightning trees natural disaster",
+    "text": "Damage from hail, storm, cyclone, flood, bushfire, lightning, landslide, or falling trees is not covered under any LDR or damage protection plan, no matter what level of cover you bought. You're fully liable for repair, towing, recovery and cleaning costs. Simba decides (based on photo/weather evidence) whether damage counts as weather-related."
+  },
+  {
+    "id": "cov-night-wildlife",
+    "cat": "Coverage Exclusions",
+    "title": "Night Driving & Wildlife / High-Risk Areas",
+    "ref": "Night Driving clause / Cl. 24",
+    "tags": "wildlife kangaroo emu cattle night non-permitted remote unsealed",
+    "text": "Driving at night (sunset to sunrise) in a 'Non-Permitted Area of Use' or listed High-Risk Area (a long list of regional towns across VIC, SA, NSW, QLD, WA \u2014 e.g. Ballarat, Mount Gambier, Dubbo, Goondiwindi, Margaret River) voids ALL coverage if there's a collision (including wildlife strikes), regardless of LDL, Premium Cover, or $0 Damage Liability purchased. You pay the full cost."
+  },
+  {
+    "id": "cov-overhead-underbody",
+    "cat": "Coverage Exclusions",
+    "title": "Overhead, Underbody, Tyre, Interior Damage",
+    "ref": "Front page / 15.2.1 / 16D",
+    "tags": "roof clearance barrier carpark tunnel rims hubcaps tyres windscreen pothole",
+    "text": "Damage from hitting overhanging objects (carpark barriers, branches, bridges, tunnels) or underbody scrapes (gutters, kerbs, poor roads) is not waiverable \u2014 you pay regardless of coverage purchased. Same applies to tyres/rims/hubcaps not from a collision, interior/trim damage, and damage from animals, birds, insects or contamination (sand/salt/mud/smoke/liquid). Vans (2\u201312 seaters) have a specific overhead damage exclusion too."
+  },
+  {
+    "id": "cov-negligence",
+    "cat": "Coverage Exclusions",
+    "title": "Negligent / Improper Use Exclusion",
+    "ref": "Cl. 15.2.8, 16E",
+    "tags": "reverse misjudged clearance gate wall post driving error",
+    "text": "Damage from driving into gates/walls/posts/barriers, misjudging clearance height/width, careless reversing, or anything Simba reasonably considers avoidable with prudent driving is excluded from all cover, even with Premium Cover purchased. Must stop immediately if a warning light, overheating, or unusual noise occurs \u2014 continuing to drive is treated as negligence (16E.1)."
+  },
+  {
+    "id": "cov-incorrect-fuel",
+    "cat": "Coverage Exclusions",
+    "title": "Incorrect Fuel Use",
+    "ref": "Hirer Responsibility section / 13D.8",
+    "tags": "wrong fuel diesel petrol contamination adblue",
+    "text": "Not covered under any insurance. You're liable for the full LDL amount plus all costs to fix the vehicle (tank draining, flushing, mechanical repairs, towing, downtime), including any consequential loss of income to Simba \u2014 for diesel/petrol mix-ups, E10 contamination, water ingress, or AdBlue misuse."
+  },
+  {
+    "id": "cov-one-incident",
+    "cat": "Coverage Exclusions",
+    "title": "Coverage Applies to First Incident Only",
+    "ref": "Cl. 15.3, AFP 16.4(c)",
+    "tags": "second incident multiple damage zero excess premium cover one claim",
+    "text": "If you bought cover reducing your excess to $0, it applies to ONE incident per hire period only. Any further incident in the same hire \u2014 related or not \u2014 is charged at the full standard LDL amount. If multiple areas of damage are found at once and the order can't be established, Simba applies your cover to the cheaper repair and charges you full price for the more expensive one."
+  },
+  {
+    "id": "cov-3rdparty-tool",
+    "cat": "Coverage Exclusions",
+    "title": "Third-Party Insurance (RentalCover.com etc.) Doesn't Reduce Liability",
+    "ref": "Cl. 14G.A",
+    "tags": "rentalcover discovercars external insurer full cover zero excess",
+    "text": "Insurance bought from a third party (RentalCover.com, DiscoverCars Protection, etc.) is a separate contract between you and them \u2014 it does NOT reduce what you owe Simba directly. You must pay Simba in full (LDL, immobilisation fees etc.) then claim reimbursement from the third party yourself. Marketing terms like 'Full Protection' or 'Zero Excess' from these providers don't override this agreement."
+  },
+  {
+    "id": "driver-age",
+    "cat": "Driver Requirements",
+    "title": "Minimum Age & Licence Type",
+    "ref": "Cl. 7.2\u20137.4.1",
+    "tags": "21 25 P1 P2 learner licence age",
+    "text": "Hirer and all authorised drivers must be at least 21. P1 (red P) licences are never permitted. Drivers need either a full licence, or a P2 licence issued at least 1 year before the rental start date. Learner drivers cannot rent under any circumstances. Note: the lower LDL band on the front page applies to ages 25\u201385; ages 21\u201324 face a significantly higher LDL ($6,380\u2013$9,818)."
+  },
+  {
+    "id": "driver-licence-fraud",
+    "cat": "Driver Requirements",
+    "title": "Invalid, Expired or Fraudulent Licence",
+    "ref": "Cl. 7.4.2\u20137.4.3",
+    "tags": "fake fraudulent expired suspended cancelled licence identity",
+    "text": "If you present an expired, suspended, cancelled or fraudulent licence (found before or during the rental), Simba can refuse to release the vehicle, terminate immediately, repossess it, and hold you liable for all costs. Any LDR/waiver becomes automatically void \u2014 same applies for fraudulent ID, payment details, or contact info (7.4.3)."
+  },
+  {
+    "id": "driver-additional",
+    "cat": "Driver Requirements",
+    "title": "Additional / Unauthorised Drivers",
+    "ref": "Cl. 7.5\u20137.6",
+    "tags": "additional driver fee unauthorised cover void",
+    "text": "Adding an authorised driver requires paying the Additional Driver Fee and providing a valid licence at signing. If an unauthorised person (not on the agreement) drives and causes damage, ALL coverage is void for that incident \u2014 full repair cost plus fees apply, no LDL protection."
+  },
+  {
+    "id": "driver-contact-info",
+    "cat": "Driver Requirements",
+    "title": "Accurate Contact Information Required",
+    "ref": "Cl. 7.1.1",
+    "tags": "address phone email verification breach",
+    "text": "You must give accurate, current, verifiable details \u2014 address, mobile, email, emergency contact. Using temporary, fake, or disconnected info is a breach and can lead to immediate termination of the hire with you liable for all charges."
+  },
+  {
+    "id": "ret-process",
+    "cat": "Return Process",
+    "title": "Return Condition & Post-Return Inspection",
+    "ref": "Cl. 13.1\u201313.4",
+    "tags": "clean refuelled bond return condition inspection",
+    "text": "Vehicle must come back in the same condition as collection (fair wear and tear excepted), at the agreed date/time/location. Simba inspects after return and you must allow extra time. Bond is only refunded if: nothing's missing, all amounts are paid, no damage, interior/exterior clean, and refuelled (13.3). Otherwise the bond can be held until everything is settled."
+  },
+  {
+    "id": "ret-postcollection",
+    "cat": "Return Process",
+    "title": "Post-Collection Inspection Requirement (Pickup)",
+    "ref": "Cl. 8.19",
+    "tags": "pre-existing damage report 1 hour 20km pickup",
+    "text": "You must inspect the vehicle within 1 hour or 20km (whichever first) after pickup and report any unrecorded pre-existing damage immediately. If you don't, the vehicle's condition as recorded is taken as accepted \u2014 any damage found later during your hire may be treated as having happened during your rental."
+  },
+  {
+    "id": "ret-photo-evidence",
+    "cat": "Return Process",
+    "title": "After-Hours / Airport / Third-Party Drop-off Evidence Rules",
+    "ref": "Cl. 13D.1\u201313D.7",
+    "tags": "airport after hours photo evidence timestamped unattended",
+    "text": "For after-hours, airport, or third-party-lot returns, you remain fully responsible for the vehicle until Simba's official inspection. If you want to dispute damage Simba finds, you need clear time-stamped photos of all sides, the exact drop-off location, taken at the moment of drop-off \u2014 otherwise Simba's own collection-time inspection is treated as conclusive. No verbal sign-off from parking/airport staff counts as an inspection."
+  },
+  {
+    "id": "ret-fuel-verification",
+    "cat": "Return Process",
+    "title": "Fuel Level Verification on Return",
+    "ref": "Cl. 13A.1\u201313A.6",
+    "tags": "fuel gauge receipt refuel proof tampering",
+    "text": "Fuel level is checked at return AND again after the vehicle is repositioned for the post-return inspection \u2014 if the gauge drops in between, Simba relies on the later reading. You must refuel within 10km of the return branch and keep your receipt; without one, Simba's post-return reading is treated as conclusive. Tampering with the fuel gauge or submitting a false receipt incurs a $199 Fuel Tampering Fee on top of the shortfall and refuelling fee."
+  },
+  {
+    "id": "ret-damage-discovery",
+    "cat": "Return Process",
+    "title": "Damage Discovered After You Leave (Post-Return Inspection is Final)",
+    "ref": "Cl. 13C, 13C.5\u201313C.6, 16Q",
+    "tags": "verbal all good final inspection conclusive deferred discovery telematics",
+    "text": "A staff member saying the car 'looks fine' at drop-off is NOT a final inspection and isn't binding. The official inspection happens later \u2014 after cleaning, repositioning, or photography \u2014 and that's what damage charges are based on, even if nothing looked wrong when you handed the keys over. Telematics, photos, and workshop reports can be used as evidence, including for damage discovered well after you've left."
+  },
+  {
+    "id": "ret-late",
+    "cat": "Return Process",
+    "title": "Late Return / Abandonment",
+    "ref": "Cl. 16R, 13C.4, 16M",
+    "tags": "late return abandoned stolen report police 24 hours",
+    "text": "Vehicle must be returned by the agreed time. Late beyond 1 hour without approval = minimum $99 fee or full day's rental rate, whichever is higher, plus applicable cover charges. After 24 hours unapproved delay, Simba can treat it as abandoned and pursue repossession/recovery, and may report it to police as stolen."
+  },
+  {
+    "id": "ret-no-refund",
+    "cat": "Return Process",
+    "title": "No Refund for Early Return / Unused Days",
+    "ref": "Cl. 8.6, 8.20, 13C.3",
+    "tags": "early return refund unused days no credit",
+    "text": "Returning early does not get you any refund or credit for unused days, insurance products, waivers, or prepaid extras \u2014 the full agreed charge stands regardless of when you bring the car back."
+  },
+  {
+    "id": "acc-process",
+    "cat": "Accidents & Claims",
+    "title": "What To Do After an Accident",
+    "ref": "Cl. 12.8, Front page note",
+    "tags": "police report 24 hours notify procedure",
+    "text": "Any accident must be reported within 24 hours, with a police report attached if it involved injury or is otherwise required by law. You must not admit fault, offer payment, or make promises/settlements to the other party \u2014 only provide a statement if required by police. Continuing to drive a damaged vehicle without Simba's written approval is treated as gross negligence (16P.3)."
+  },
+  {
+    "id": "acc-thirdparty-atfault",
+    "cat": "Accidents & Claims",
+    "title": "Third Party At Fault \u2014 You Still Pay LDL First",
+    "ref": "Cl. 14.3, 14A, 14B.6",
+    "tags": "not my fault third party recovery refund pending",
+    "text": "Even if you believe someone else caused the damage, you must pay the full LDL amount upfront to lodge a claim. Simba only releases/refunds it once it has written confirmation of fault from the third party, their licence/contact details, and insurance info. If the amount recovered from the third party is less than total costs, the shortfall comes out of your LDL or bond."
+  },
+  {
+    "id": "acc-repairer",
+    "cat": "Accidents & Claims",
+    "title": "No Right to Choose Repairer or Get a Quote First",
+    "ref": "Cl. 14A.4\u201314A.6, 14H",
+    "tags": "repairer quote independent assessor negotiate invoice binding",
+    "text": "You cannot choose, direct, or request a particular repairer \u2014 Simba uses its own approved network and isn't required to get competitive quotes or give you a quote before starting repairs. The repairer's final invoice is what you're liable for; you can't negotiate independently with repairers or lodge your own insurance claims without Simba's written consent."
+  },
+  {
+    "id": "acc-noncooperation",
+    "cat": "Accidents & Claims",
+    "title": "Failure to Cooperate / Provide Dashcam Footage",
+    "ref": "Cl. 14A.7, 14C",
+    "tags": "dashcam footage delay fee non-cooperation",
+    "text": "If you have dashcam, phone, or CCTV footage relevant to an incident, you must hand it over within 24 hours of being asked \u2014 withholding it counts as non-cooperation and can trigger Delay Fees. General non-cooperation in the claims process (not returning calls, refusing to provide statements/insurer details) lets Simba treat the incident as though you're liable, and can forfeit any LDR coverage."
+  },
+  {
+    "id": "acc-totalloss",
+    "cat": "Accidents & Claims",
+    "title": "Total Loss / Write-Off Liability",
+    "ref": "Cl. 14B.5",
+    "tags": "write off total loss 30 days immobilisation",
+    "text": "If the vehicle is written off, you're liable for the full LDL amount regardless of fault (unless your LDR specifically covers total loss), PLUS up to 30 days of Immobilisation Fees at Simba's maximum daily rate to cover the time needed for assessment, settlement and fleet replacement \u2014 independent of any insurer payout timing."
+  },
+  {
+    "id": "acc-falseclaim",
+    "cat": "Accidents & Claims",
+    "title": "False or Misleading Accident/Fault Claims",
+    "ref": "Cl. 12.10F, 14E",
+    "tags": "false report misleading fraud investigation fee",
+    "text": "Reporting false, misleading, or incomplete accident information voids any LDR/coverage \u2014 you become liable for the full cost of damage, Simba's loss of income, and associated admin/legal costs. Falsely claiming a mechanical fault (later shown to be false or caused by misuse) also adds a $250 Administrative Investigation Fee plus all towing/diagnostic costs."
+  },
+  {
+    "id": "swap-vehicle",
+    "cat": "Vehicle Swap / Replacement",
+    "title": "Replacement Vehicle Carries Over All Original Terms",
+    "ref": "Cl. 12.10B, 12.11",
+    "tags": "swap replacement continuity no new signature",
+    "text": "If Simba gives you a replacement vehicle for any reason (mechanical issue, operational need, or goodwill), ALL the terms, fees, LDL amounts, and payment authorisations from your original agreement automatically apply to the new vehicle \u2014 no new signature required. Just using the replacement vehicle counts as accepting these terms continue."
+  },
+  {
+    "id": "swap-inspect",
+    "cat": "Vehicle Swap / Replacement",
+    "title": "Must Inspect Replacement Vehicle Quickly",
+    "ref": "Cl. 12.10C",
+    "tags": "30 minutes 10km replacement pre-existing damage",
+    "text": "You must inspect a replacement vehicle and report any pre-existing damage within 30 minutes or 10km, whichever comes first. Miss that window and any damage found later is assumed to have happened during your hire and is fully chargeable to you."
+  },
+  {
+    "id": "swap-changeover",
+    "cat": "Vehicle Swap / Replacement",
+    "title": "Changeover Not Guaranteed for Complaints",
+    "ref": "Cl. 12.10.1\u201312.10.6, 12.10A",
+    "tags": "changeover defect dissatisfaction no refund",
+    "text": "If you report a fault, Simba decides whether an inspection or changeover is warranted \u2014 there's no automatic right to a new vehicle. If inspection shows the car is working within spec, Simba has no obligation to swap it, refund you, or compensate you, even if you're unhappy with it. If a fault claim is later found to be false, you can be charged inspection/towing costs plus a $250 admin fee."
+  },
+  {
+    "id": "pen-tolls",
+    "cat": "Tolls, Fines & Penalties",
+    "title": "Tolls and Toll Admin Fees",
+    "ref": "Cl. 12.9.1\u201312.9.2",
+    "tags": "toll tag video tolling admin fee non-refundable",
+    "text": "All tolls plus an admin fee are your responsibility. If your toll tag is recognised: standard toll + processing admin fee. If not recognised, missing, or captured by camera (video tolling): standard toll + $2.00\u2013$6.95 admin fee per toll. These charges are non-refundable and non-negotiable, automatically deducted from your card on file, and you waive any right to dispute them."
+  },
+  {
+    "id": "pen-fines",
+    "cat": "Tolls, Fines & Penalties",
+    "title": "Traffic Fines & Infringements",
+    "ref": "Cl. 12.1, 12.3A",
+    "tags": "speeding parking fine nomination fee",
+    "text": "You're responsible for all parking, speeding, and traffic fines incurred during your hire, plus a $110 Fine Nomination Fee per fine for Simba's processing cost. If Simba ends up paying an infringement directly (to protect its registration/licence), it can recover the full amount plus admin fees from you without prior notice, even if you later get a reissued notice from the authority."
+  },
+  {
+    "id": "pen-payment-auth",
+    "cat": "Tolls, Fines & Penalties",
+    "title": "Ongoing Authority to Charge Your Card",
+    "ref": "Cl. 8.15\u20138.18, 16C.1\u201316C.2",
+    "tags": "card on file 90 days charge authorisation",
+    "text": "By signing, you authorise Simba to charge your card on file for any outstanding charges \u2014 extra rental, tolls, fines, damage, fuel, cleaning, admin fees \u2014 without needing further notice or consent. This authority stays valid for 90 days after your rental ends, and Simba can split charges into multiple transactions as long as the total doesn't exceed what's owed."
+  },
+  {
+    "id": "pen-interest",
+    "cat": "Tolls, Fines & Penalties",
+    "title": "Interest on Overdue Amounts & Debt Collection",
+    "ref": "Cl. 8.7, 16V",
+    "tags": "interest 12% 10% collection agency credit reporting",
+    "text": "Unpaid amounts accrue interest at 12% per annum compounded daily (clause 8.7) or 10% per annum (clause 16V.2 \u2014 note the agreement states both figures in different sections). After 30 days unpaid, Simba can register the debt with credit reporting agencies, and may engage external debt collectors (e.g. Marshal Freeman Collections), with all recovery/legal costs added to your balance."
+  },
+  {
+    "id": "prohib-commercial",
+    "cat": "Prohibited Uses & Behaviour",
+    "title": "Commercial Use Banned (Rideshare/Delivery)",
+    "ref": "Cl. 8.24",
+    "tags": "uber rideshare delivery courier commercial misuse",
+    "text": "You can't use the vehicle for rideshare, food delivery, courier work, paid transport, towing, or any commercial activity without written authorisation. Doing so voids all LDL coverage, makes you liable for full repair costs, plus a $500 Commercial Misuse Fee and any associated losses."
+  },
+  {
+    "id": "prohib-substances",
+    "cat": "Prohibited Uses & Behaviour",
+    "title": "Dangerous/Illegal Goods, Smoking, Pets",
+    "ref": "Cl. 8.21, 10.6, 10.10, Pet Travel Pass clause",
+    "tags": "hazardous illegal smoking pets animals",
+    "text": "The vehicle must not be used to carry hazardous, flammable, explosive, corrosive, chemical, biohazardous, illegal, or stolen goods \u2014 you're liable for all resulting contamination, cleaning, police seizure, and downtime costs, even if the vehicle gets impounded. Smoking anywhere in the vehicle is banned ($395 fee). Pets are only allowed with a purchased Pet Travel Pass or if it's a registered assistance animal \u2014 you remain liable for any pet-related damage or cleaning."
+  },
+  {
+    "id": "prohib-alcohol",
+    "cat": "Prohibited Uses & Behaviour",
+    "title": "Alcohol/Drugs & Reckless Driving Voids Cover",
+    "ref": "Cl. 11.2, 16O.1\u201316O.3",
+    "tags": "dui drink driving reckless racing speeding burnout",
+    "text": "Driving under the influence of alcohol or drugs above the legal limit immediately voids ALL insurance and waiver coverage, making you fully liable for everything. Reckless, careless or dangerous driving (speeding, racing, burnouts, aggressive driving, tailgating) is also excluded from any protection plan. Telematics, police reports, or witness statements can be used as evidence."
+  },
+  {
+    "id": "prohib-modify",
+    "cat": "Prohibited Uses & Behaviour",
+    "title": "No Modifications, Racks, Stickers, Tampering",
+    "ref": "Cl. 8.22\u20138.23, 16A.6\u201316A.7",
+    "tags": "roof rack sticker gps telematics tamper modification",
+    "text": "You can't fit roof racks, bike racks, tow attachments, stickers, GPS units, UHF radios, or signal boosters without written approval \u2014 you're liable for damage/residue removal if you do. Tampering with GPS/telematics/security systems triggers a $495 fee plus repossession and all recovery costs; disabling safety systems (lane-assist, collision warning, sensors etc.) triggers a separate $495 fee."
+  },
+  {
+    "id": "prohib-conduct",
+    "cat": "Prohibited Uses & Behaviour",
+    "title": "Staff Conduct, Recording & Defamation Rules",
+    "ref": "Cl. 16O.4\u201316O.9",
+    "tags": "recording filming staff abuse reviews social media defamation",
+    "text": "You can't record/photograph/film Simba staff, premises, internal systems, or employee ID without express consent \u2014 any unauthorised recording must be deleted immediately, including from 'Recently Deleted' on iPhone. Making false, misleading, or defamatory statements about Simba (including in reviews or on social media) is a breach that can lead to legal action and recovery of legal costs."
+  },
+  {
+    "id": "prohib-remote",
+    "cat": "Prohibited Uses & Behaviour",
+    "title": "Unsealed Roads & Remote Areas",
+    "ref": "Cl. 16F, Cl. 7.4",
+    "tags": "off road unsealed beach dirt track national park",
+    "text": "Driving on unsealed, off-road, or restricted areas (beaches, dirt tracks, national parks, roads not gazetted for normal traffic) is prohibited without written authorisation. Any resulting damage, towing, or breakdown costs are fully on you regardless of any coverage purchased, and you're responsible for extra recovery costs if you break down more than 100km from the rental branch."
+  },
+  {
+    "id": "add-pra",
+    "cat": "Add-Ons & Optional Cover",
+    "title": "Roadside Assistance (Standard vs Premium)",
+    "ref": "Roadside Assistance clause",
+    "tags": "PRA callout breakdown ferry interstate bond increase",
+    "text": "Premium Roadside Assistance (PRA) removes call-out fees entirely (unlimited callouts) but is separate from Premium Cover. PRA is mandatory if you're driving to ferry-accessible islands or interstate \u2014 decline it under those mandatory conditions and your security bond rises to a minimum $750. Without PRA, Standard Roadside Assistance applies with a minimum $149 call-out fee per incident."
+  },
+  {
+    "id": "add-afp",
+    "cat": "Add-Ons & Optional Cover",
+    "title": "Additional Fee Protection (AFP)",
+    "ref": "Cl. 16.1\u201316.5",
+    "tags": "afp waiver immobilisation claims fee waiver",
+    "text": "AFP is an add-on (NOT insurance) that waives the Daily Immobilisation Fee and the $295 Claims Management Fee for one incident per hire. It doesn't cover the LDL/excess itself, negligence-caused damage, unreported incidents, flood/underbody/overhead/water damage, or third-party liability. Must be purchased before vehicle collection and Simba can void it if you breach the agreement, don't report an incident within 24 hours, or give false information."
+  },
+  {
+    "id": "add-windscreen",
+    "cat": "Add-Ons & Optional Cover",
+    "title": "Windscreen & Tyre Cover",
+    "ref": "Windscreen and Tyre Cover clause",
+    "tags": "windscreen chip crack tyre puncture repurchase",
+    "text": "Covers repair/replacement of windscreen cracks, chips, and tyre punctures \u2014 included in Premium Cover but only for a single incident; you'd need to repurchase it to keep the coverage active. Note: other vehicle windows (including rear) are excluded from this cover."
+  },
+  {
+    "id": "add-interior",
+    "cat": "Add-Ons & Optional Cover",
+    "title": "Vehicle Interior Cover",
+    "ref": "Vehicle Interior Cover clause",
+    "tags": "spill stain interior cleaning",
+    "text": "Protects against accidental spills, stains, or interior damage, helping avoid extra cleaning/repair fees \u2014 included as part of broader cover packages."
+  },
+  {
+    "id": "add-pet",
+    "cat": "Add-Ons & Optional Cover",
+    "title": "Pet Travel Pass",
+    "ref": "Pet Travel Pass clause",
+    "tags": "pet dog cat assistance animal",
+    "text": "Pets are only allowed in the vehicle if you've bought a Pet Travel Pass, or the animal is a registered guide/assistance dog. You remain fully liable for any damage or cleaning costs caused by a pet regardless of the pass."
+  },
+  {
+    "id": "term-refusal",
+    "cat": "Termination & Refusal of Service",
+    "title": "Right to Refuse Service / Future Rentals",
+    "ref": "Cl. 4.3\u20134.4",
+    "tags": "refuse blacklist ban future rental",
+    "text": "Simba can refuse to rent to anyone at its sole discretion \u2014 suspected fraud, unacceptable risk, aggressive behaviour, unpaid balances, or prior breach \u2014 without having to give a reason (except where law requires disclosure). It can also refuse future rentals to anyone who's previously breached the agreement, caused loss, or made false allegations."
+  },
+  {
+    "id": "term-repossess",
+    "cat": "Termination & Refusal of Service",
+    "title": "Repossession Without Notice",
+    "ref": "Cl. 16B, 17.1\u201317.2",
+    "tags": "repossess recover agent choice mercantile breach",
+    "text": "Simba can repossess the vehicle without notice if you breach the agreement, payment is dishonoured/overdue, the vehicle is at risk, or you've given false information \u2014 including entering a property to recover it. All towing, locksmith, admin, and transport costs of repossession are charged to you, and you get no refund for the unused period. Simba may use a licensed agent (e.g. Choice Mercantile) to do this on its behalf."
+  },
+  {
+    "id": "term-misconduct",
+    "cat": "Termination & Refusal of Service",
+    "title": "Behavioural Misconduct & Staff Safety",
+    "ref": "Cl. 16O.4",
+    "tags": "aggressive abusive threatening zero tolerance",
+    "text": "Zero-tolerance for aggressive, abusive, threatening, discriminatory, or intimidating behaviour toward staff. Any such conduct lets Simba immediately refuse service, terminate the agreement, require you to leave, decline future rentals, and recover related costs \u2014 audio/video recordings may be kept as evidence."
+  },
+  {
+    "id": "gen-dispute",
+    "cat": "Disputes & Legal",
+    "title": "Internal Dispute Resolution Process",
+    "ref": "Cl. 16K, Cl. 8.16",
+    "tags": "complaint AFCA dispute chargeback feedback email",
+    "text": "Raise disputes in writing first to feedback@simbacarhire.com.au; Simba aims to respond within 10 business days. If unresolved, you can escalate to the Australian Financial Complaints Authority (AFCA) or the AFIA Car Rental Conciliation Service. You must raise charge disputes within 3 business days of receiving an invoice or notice (17.4.2), or the charges are deemed accepted."
+  },
+  {
+    "id": "gen-chargeback",
+    "cat": "Disputes & Legal",
+    "title": "Chargeback Restrictions",
+    "ref": "Cl. 8.16, 16K.4",
+    "tags": "chargeback dispute unfounded fee",
+    "text": "You're expected to raise payment disputes with Simba in writing first, before going to your bank for a chargeback. If a chargeback you raise turns out to be unfounded, Simba can charge you a fee to cover its admin and any processor fees imposed on it as a result."
+  },
+  {
+    "id": "gen-liability-limit",
+    "cat": "Disputes & Legal",
+    "title": "Owner's Limitation of Liability",
+    "ref": "Cl. 18, 21.5",
+    "tags": "consequential loss limitation liability cap",
+    "text": "Simba's liability is capped at the amount you've paid under the agreement, and excludes consequential/indirect/special losses (like lost profit or business interruption) to the extent allowed by law \u2014 without affecting your non-excludable rights under the Australian Consumer Law."
+  },
+  {
+    "id": "gen-governing-law",
+    "cat": "Disputes & Legal",
+    "title": "Governing Law & Jurisdiction",
+    "ref": "Cl. 16W, 23.7",
+    "tags": "jurisdiction court state territory",
+    "text": "Governed by Australian law and the law of the State/Territory where the vehicle was hired (or where Simba elects to bring proceedings). You agree disputes can be heard in courts/tribunals of any Australian State or Territory Simba chooses, and you waive objections based on inconvenience."
+  },
+  {
+    "id": "gen-terms-update",
+    "cat": "Disputes & Legal",
+    "title": "Terms Can Be Updated",
+    "ref": "Cl. 23.X",
+    "tags": "update amend change terms future rental",
+    "text": "Simba can update these terms at any time; changes are published on its website or available at the branch. Updates don't apply retroactively to an already-signed agreement unless you're given written notice and agree \u2014 but they DO apply automatically to any future booking, extension, or new rental made after the update takes effect."
+  },
+  {
+    "id": "gen-data",
+    "cat": "Disputes & Legal",
+    "title": "GPS / Telematics Monitoring & Data Use",
+    "ref": "Cl. 16A.1\u201316A.5, 8.9",
+    "tags": "gps tracking telematics privacy data monitoring",
+    "text": "The vehicle has GPS/telematics that track location, speed, distance, fuel use, ignition status and accident detection. You consent to Simba collecting and using this data for monitoring, theft/misuse investigation, compliance checks, and sharing with insurers/police/regulators where needed. Telematics data is treated as conclusive evidence of mileage, speed, and usage unless you provide expert evidence proving it's wrong."
+  },
+  {
+    "id": "reg-ctp",
+    "cat": "Registration & CTP",
+    "title": "Rego & CTP Levy is Charged Separately",
+    "ref": "Registration clause, Cl. 14G",
+    "tags": "rego ctp levy registration third party injury",
+    "text": "All vehicles come with current registration and CTP (personal injury only \u2014 doesn't cover vehicle or property damage). A separate 'Rego & CTP Levy' is charged on top of the daily rental rate; it's a statutory/owner recovery charge and does NOT reduce or replace any LDL you owe, even if a third party is later found at fault."
+  }
+]
