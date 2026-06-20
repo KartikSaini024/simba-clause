@@ -149,7 +149,7 @@ module.exports = async function handler(req, res) {
   const clauseData = loadClauses();
   const systemPrompt = SYSTEM_PROMPT.replace("{{CLAUSES}}", clauseData);
 
-  // gpt-oss-120b is a reasoning model: it spends tokens on internal
+  // nvidia/nemotron-3-nano-30b-a3b is a reasoning model: it spends tokens on internal
   // chain-of-thought BEFORE writing the visible reply. If max_tokens is
   // too low, the reasoning phase alone can exhaust the budget and the
   // API returns HTTP 200 with an empty/missing message.content (this is
@@ -164,7 +164,7 @@ module.exports = async function handler(req, res) {
   const wantsDepth = lastUserMsg && typeof lastUserMsg.content === "string" && depthSignal.test(lastUserMsg.content);
 
   const payload = {
-    model: "openai/gpt-oss-120b",
+    model: "nvidia/nemotron-3-nano-30b-a3b",
     messages: [{ role: "system", content: systemPrompt }, ...trimmedMessages],
     temperature: 0.2,
     max_tokens: wantsDepth ? 900 : 500,
