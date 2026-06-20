@@ -4,7 +4,11 @@
   "outputDirectory": "public",
   "functions": {
     "api/chat.js": {
-      "maxDuration": 30
+      "maxDuration": 30,
+      "includeFiles": "public/clauses.json"
+    },
+    "api/debug.js": {
+      "maxDuration": 10
     }
   }
 }
