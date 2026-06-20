@@ -1,11 +1,11 @@
-# Copy this file to .env (for local dev with `vercel dev`) and fill in your key.
-# In production (Vercel), set these as Environment Variables in the project
-# dashboard instead — never commit a real key to the repo.
-
-# Your OpenRouter API key. Get one at https://openrouter.ai/keys
-OPENROUTER_API_KEY=sk-or-v1-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-
-# Optional: used in the HTTP-Referer header sent to OpenRouter for
-# analytics/rate-limit attribution. Set this to your deployed Vercel URL
-# once you have one (e.g. https://simba-clause-finder.vercel.app).
-PUBLIC_APP_URL=https://simba-clause-finder.vercel.app
+{
+  "name": "simba-clause-finder",
+  "version": "1.0.0",
+  "description": "Internal staff tool for searching the Simba Car Hire rental agreement, with an AI chat assistant backed by OpenRouter.",
+  "scripts": {
+    "dev": "vercel dev"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
