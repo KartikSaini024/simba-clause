@@ -146,7 +146,7 @@ module.exports = async function handler(req, res) {
         Authorization: `Bearer ${apiKey}`,
         // Optional but recommended by OpenRouter for analytics/rate-limit context
         "HTTP-Referer": process.env.PUBLIC_APP_URL || "https://simba-clause-finder.vercel.app",
-        "X-Title": "Simba Car Hire — Staff Clause Assistant",
+        "X-Title": "Simba Car Hire - Staff Clause Assistant",
       },
       body: JSON.stringify(payload),
     });
